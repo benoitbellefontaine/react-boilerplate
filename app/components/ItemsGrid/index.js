@@ -2,11 +2,17 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+`;
+
+const Item = styled.div`
+    width:100%;
 `;
 
 const Hero = styled.div`
-    width:100%;
-    height: 400px;
+    width:33%;
+    padding:24px;
 `;
 
 const Image = styled.div`
@@ -14,23 +20,20 @@ const Image = styled.div`
     background-position: center;
     background-size: cover;
     width:100%;
-    height:400px;
+    height:200px;
 `;
 
-const Item = styled.div`
-    width:100%;
-    height:400px;
-`;
-
-export default class ItemDetails extends React.Component {
+export default class ItemsGrid extends React.Component {
     render() {
-        const {item} = this.props;
+        const {items, onItemClick} = this.props;
         return (
             <Wrapper>
-                <Hero>
-                    <Image image={item.picture} />
-                    <Item >{item.name}</Item>
-                </Hero>
+                {items.map( (item,index) => (
+                    <Hero key={index} >
+                        <Image image={item.picture} onClick={(event) => onItemClick(item,event)}/>
+                        <Item >{item.name}</Item>
+                    </Hero>
+                ))}
             </Wrapper>
         );
     }
