@@ -12,7 +12,7 @@
 
 import { fromJS } from 'immutable';
 
-import { LOAD_REPOS_SUCCESS, LOAD_REPOS, LOAD_REPOS_ERROR } from './constants';
+import { LOAD_REPOS_SUCCESS, LOAD_REPOS, LOAD_REPOS_ERROR, SET_HERO_STARTING_STYLE } from './constants';
 
 // The initial state of the App
 const initialState = fromJS({
@@ -22,6 +22,12 @@ const initialState = fromJS({
   userData: {
     repositories: false,
   },
+  startingHeroStyle: {
+    x:0,
+    y:0,
+    height:0,
+    width:0
+  }
 });
 
 function appReducer(state = initialState, action) {
@@ -38,7 +44,14 @@ function appReducer(state = initialState, action) {
         .set('currentUser', action.username);
     case LOAD_REPOS_ERROR:
       return state.set('error', action.error).set('loading', false);
-    default:
+    case SET_HERO_STARTING_STYLE:
+      console.log(action);
+      return state
+        .setIn(['startingHeroStyle', 'x'],      action.x)
+        .setIn(['startingHeroStyle', 'y'],      action.y)
+        .setIn(['startingHeroStyle', 'width'],  action.width)
+        .setIn(['startingHeroStyle', 'height'], action.height);
+        default:
       return state;
   }
 }

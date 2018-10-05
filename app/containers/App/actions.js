@@ -15,7 +15,7 @@
  *    }
  */
 
-import { LOAD_REPOS, LOAD_REPOS_SUCCESS, LOAD_REPOS_ERROR } from './constants';
+import { LOAD_REPOS, LOAD_REPOS_SUCCESS, LOAD_REPOS_ERROR, SET_HERO_STARTING_STYLE } from './constants';
 
 /**
  * Load the repositories, this action starts the request saga
@@ -55,5 +55,12 @@ export function repoLoadingError(error) {
   return {
     type: LOAD_REPOS_ERROR,
     error,
+  };
+}
+
+export const setHeroStartingStyle = ({width,height,x,y}) => {
+  return {
+    type: SET_HERO_STARTING_STYLE, 
+    width,height,x,y
   };
 }
